@@ -6,29 +6,27 @@ class Header extends React.Component {
 
   render() {
     return (
-      <section className="header mb-4">
-        <Row>
-          <Col className="app-name py-2 text-center" md={4} xs={12}>
+        <Row className="header mb-4">
+          <Col className="app-name align-self-center text-center" md={4} xs={12}>
             obsidian
           </Col>
           <Col className="menu py-4" md xs={12}>
             <Row className="px-4 text-center">
               <Col xs={12} sm={6} md>
-                <a className="">extrato</a>
+                <a className="">EXTRATO</a>
               </Col>
               <Col xs={12} sm={6} md>
-                <a className="">compra</a>
+                <a className="">COMPRA</a>
               </Col>
               <Col xs={12} sm={6} md>
-                <a className="">venda</a>
+                <a className="">VENDA</a>
               </Col>
               <Col xs={12} sm={6} md>
-                <a className="">troca</a>
+                <a className="">TROCA</a>
               </Col>
             </Row>
           </Col>
         </Row>
-      </section>
     )
   }
 }
