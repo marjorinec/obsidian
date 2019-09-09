@@ -1,0 +1,13 @@
+.app-name {
+  background-color: purple;
+  font-family: monospace;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.menu {
+  background-color: green;
+  font-family: monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

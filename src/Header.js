@@ -1,0 +1,26 @@
+import React from 'react'
+import './Header.css'
+import { Row, Col } from 'react-bootstrap'
+
+class Header extends React.Component {
+
+  render() {
+    return (
+      <section className="header">
+        <Row>
+          <Col className="app-name pl-5 py-2" md={4}>
+            obsidian
+          </Col>
+          <Col className="menu py-4" md={8}>
+            <a className="p-5">extrato</a>
+            <a className="p-5">compra</a>
+            <a className="p-5">venda</a>
+            <a className="p-5">troca</a>
+          </Col>
+        </Row>
+      </section>
+    )
+  }
+}
+
+export default Header
