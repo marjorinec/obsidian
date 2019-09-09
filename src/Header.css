@@ -3,6 +3,7 @@
   font-family: monospace;
   font-size: 3rem;
   font-weight: bold;
+  min-width: 300px;
 }
 
 .menu {

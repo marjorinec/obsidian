@@ -8,19 +8,28 @@ class Header extends React.Component {
     return (
       <section className="header mb-4">
         <Row>
-          <Col className="app-name pl-5 py-2" md={4} xs={12}>
+          <Col className="app-name py-2 text-center" md={4} xs={12}>
             obsidian
           </Col>
-          <Col className="menu py-4" md={8} xs={12}>
-            <a className="p-5">extrato</a>
-            <a className="p-5">compra</a>
-            <a className="p-5">venda</a>
-            <a className="p-5">troca</a>
+          <Col className="menu py-4" md xs={12}>
+            <Row className="px-4 text-center">
+              <Col xs={12} sm={6} md>
+                <a className="">extrato</a>
+              </Col>
+              <Col xs={12} sm={6} md>
+                <a className="">compra</a>
+              </Col>
+              <Col xs={12} sm={6} md>
+                <a className="">venda</a>
+              </Col>
+              <Col xs={12} sm={6} md>
+                <a className="">troca</a>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </section>
     )
   }
 }
-
 export default Header
