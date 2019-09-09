@@ -4,13 +4,17 @@ import { Card } from 'react-bootstrap'
 class Balance extends React.Component {
   render() {
     return (
-      <Card bg="success" style={{ width: '12rem'}}>
+      <Card style={{ width: '12rem'}}>
         <Card.Body>
           <Card.Title>
-            Saldo total em reais
+            Seu Saldo
           </Card.Title>
           <Card.Text>
-            R$ 100.000,00
+            <ul className="list-unstyled">
+              <li>R$ 100.000,00</li>
+              <li>BRT 15</li>
+              <li> Bitcoin 20</li>
+            </ul>
           </Card.Text>
         </Card.Body>
       </Card>

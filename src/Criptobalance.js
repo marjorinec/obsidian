@@ -9,13 +9,13 @@ class Criptobalance extends React.Component {
   render() {
 
     return (
-      <Card bg="success" style={{ width: '12rem'}}>
+      <Card style={{ width: '12rem'}}>
         <Card.Body>
           <Card.Title>
-            Saldo em {this.props.coinName}
+            {this.props.coinName}
           </Card.Title>
           <Card.Text>
-            42 {this.coinCode}
+            {this.coinCode} = X BRL
           </Card.Text>
         </Card.Body>
       </Card>
