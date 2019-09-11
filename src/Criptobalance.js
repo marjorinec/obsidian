@@ -7,19 +7,22 @@ class Criptobalance extends React.Component {
     super(props)
     this.coinCode = props.coinName === "Bitcoin" ? "BTC" : "BRT"
     this.state = {
-      "bitcoinValue": "",
-      "dollarValue": "",
+      "coinValue": "",
       "ready": false
     }
   }
 
-  async getBitcoinValue() {
-    const bitcoinValue = await axios.get("https://www.mercadobitcoin.net/api/BTC/ticker/")
-    this.setState({"bitcoinValue": bitcoinValue.data.ticker.buy})
+  async getCoinValue(coinCode) {
+    if (coinCode === 'BTC') {
+      const bitcoinValue = await axios.get("https://www.mercadobitcoin.net/api/BTC/ticker/")
+      this.setState({"coinValue": bitcoinValue.data.ticker.buy})
+    } else {
+      this.setState({"coinValue": "dol"}) 
+    }
   }
 
   async componentDidMount(prevProps, prevState) {
-      await this.getBitcoinValue()
+      await this.getCoinValue(this.coinCode)
       this.setState({"ready": true})
   }
 
@@ -38,7 +41,7 @@ class Criptobalance extends React.Component {
               {this.props.coinName}
             </Card.Title>
             <Card.Text>
-              {this.coinCode} = X BRL {this.state.bitcoinValue}
+              {this.coinCode} = X BRL {this.state.coinValue}
             </Card.Text>
           </Card.Body>
         </Card>
