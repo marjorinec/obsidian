@@ -6,7 +6,8 @@ class Header extends React.Component {
 
   render() {
     return (
-        <Row className="header mb-4">
+      <section className="header mb-4">
+        <Row>
           <Col className="app-name align-self-center text-center" md={4} xs={12}>
             obsidian
           </Col>
@@ -27,6 +28,7 @@ class Header extends React.Component {
             </Row>
           </Col>
         </Row>
+      </section>
     )
   }
 }
