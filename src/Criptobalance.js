@@ -28,8 +28,31 @@ class Criptobalance extends React.Component {
     return bitcoinValue.data.ticker.buy
   }
 
-  async fetchDolarValue(){
-    const dollarData = await axios.get("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='09-10-2019'&$top=100&$format=json&$select=cotacaoCompra,cotacaoVenda,dataHoraCotacao")
+  getCurrentDate() {
+    const currentDay = new Date()
+    let day = currentDay.getDate() - 1
+    let month = currentDay.getMonth() + 1
+    const year = currentDay.getFullYear()
+
+    console.log(month)
+
+    if (month.toString().length === 1) {
+      month = `0${month}`
+    }
+
+    if (day.toString().length === 1) {
+      day = `0${day}`
+    }
+
+    return `${month}/${day}/${year}`
+  }
+
+  async fetchDolarValue() {
+    const currentDate = this.getCurrentDate()
+    console.log(currentDate)
+    console.log(`https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${currentDate}'&$top=100&$format=json&$select=cotacaoCompra,cotacaoVenda,dataHoraCotacao`)
+    const dollarData = await axios.get(`https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${currentDate}'&$top=100&$format=json&$select=cotacaoCompra,cotacaoVenda,dataHoraCotacao`)
+    console.log(dollarData)
     const dollarValue = dollarData.data.value[0].cotacaoCompra
 
     return dollarValue
