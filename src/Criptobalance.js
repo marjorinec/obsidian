@@ -13,13 +13,28 @@ class Criptobalance extends React.Component {
   }
 
   async getCoinValue(coinCode) {
+    let value
     if (coinCode === 'BTC') {
-      const bitcoinValue = await axios.get("https://www.mercadobitcoin.net/api/BTC/ticker/")
-      this.setState({"coinValue": bitcoinValue.data.ticker.buy})
+      value = await this.fetchBitcoinValue()
     } else {
-      this.setState({"coinValue": "dol"}) 
+      value = await this.fetchDolarValue()
     }
+
+    this.setState({ "coinValue": value })
   }
+
+  async fetchBitcoinValue() {
+    const bitcoinValue = await axios.get("https://www.mercadobitcoin.net/api/BTC/ticker/")
+    return bitcoinValue.data.ticker.buy
+  }
+
+  async fetchDolarValue(){
+    const dollarData = await axios.get("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='09-10-2019'&$top=100&$format=json&$select=cotacaoCompra,cotacaoVenda,dataHoraCotacao")
+    const dollarValue = dollarData.data.value[0].cotacaoCompra
+
+    return dollarValue
+  }
+
 
   async componentDidMount(prevProps, prevState) {
       await this.getCoinValue(this.coinCode)
