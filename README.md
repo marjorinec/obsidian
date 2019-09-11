@@ -27,3 +27,11 @@ Ele foi feito como um desafio técnico para a Stone.
 - Axios
 - Roteador
  - react-router
+
+
+### Passos pro roteamento
+- instala
+- tag principal do aplicativo vai ser Router
+- cria componentes separados pra cada página (home e extrato)
+- LinkTo as urls desejadas no Header
+- e cria as rotas no componente principal usando o <Route>
