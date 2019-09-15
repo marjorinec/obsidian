@@ -28,13 +28,11 @@ class Criptobalance extends React.Component {
     return bitcoinValue.data.ticker.buy
   }
 
-  getCurrentDate() {
+  getUsefulDate(dayCounter=0) {
     const currentDay = new Date()
-    let day = currentDay.getDate() - 1
+    let day = currentDay.getDate() - dayCounter
     let month = currentDay.getMonth() + 1
     const year = currentDay.getFullYear()
-
-    console.log(month)
 
     if (month.toString().length === 1) {
       month = `0${month}`
@@ -47,15 +45,23 @@ class Criptobalance extends React.Component {
     return `${month}/${day}/${year}`
   }
 
+  //A API do Banco Central do Brasil parece não retornar a cotação do dólar em finais de semana e nas primeiras horas do dia, portanto
+  //quando a função não consegue obter a cotação, ela tenta pegar a do dia anterior até ter sucesso
   async fetchDolarValue() {
-    const currentDate = this.getCurrentDate()
-    console.log(currentDate)
-    console.log(`https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${currentDate}'&$top=100&$format=json&$select=cotacaoCompra,cotacaoVenda,dataHoraCotacao`)
-    const dollarData = await axios.get(`https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${currentDate}'&$top=100&$format=json&$select=cotacaoCompra,cotacaoVenda,dataHoraCotacao`)
-    console.log(dollarData)
-    const dollarValue = dollarData.data.value[0].cotacaoCompra
+    let dollarData
+    let dollarValue = undefined
+    let currentDate = this.getUsefulDate()
+    let dayCounter = 0
 
-    return dollarValue
+    while (dollarValue === undefined) {
+      currentDate = this.getUsefulDate(dayCounter)
+      dollarData = await axios.get(`https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${currentDate}'&$top=100&$format=json&$select=cotacaoCompra,cotacaoVenda,dataHoraCotacao`)
+      dollarValue = dollarData.data.value[0]
+      dayCounter += 1
+    }
+
+    return dollarValue.cotacaoCompra
+
   }
 
 
