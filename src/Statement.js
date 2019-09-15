@@ -22,14 +22,20 @@ class Statement extends React.Component {
   render() {
     const transactionsList = this.state.transactions.map(
       ({ destination, source, value, sourceValue, date }) => {
-        return (
-          <tr>
-            <td className="text-success">
-              +{value} {destination}
-            </td>
+        let sourceColumn = ""
+        if (sourceValue) {
+          sourceColumn = (
             <td className="text-danger">
               -{sourceValue} {source}
+            </td>            
+          )
+        }
+        return (
+          <tr>
+            <td className="text-success" colSpan={ sourceValue ? 1 : 2 }>
+              +{value} {destination}
             </td>
+            {sourceColumn}
             <td>
               {date.toLocaleString('pt-BR')}
             </td>
