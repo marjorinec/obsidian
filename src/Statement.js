@@ -7,14 +7,13 @@ class Statement extends React.Component {
     this.state = {
       transactions: [
         {
-          destination: 'BRL',
-          value: 100000
+          destination: 'BRL', value: 100000, date: new Date()
         },
         {
-          source: 'BRL', destination: 'BRT', value: 15, rate: 0.12
+          source: 'BRL', destination: 'BRT', value: 15, sourceValue: 200, date: new Date()
         },
         {
-          source: 'BRL', destination: 'BTC', value: 10, rate: 0.20
+          source: 'BRL', destination: 'BTC', value: 10, sourceValue: 400, date: new Date()
         }
       ]
     }
