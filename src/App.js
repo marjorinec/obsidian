@@ -1,8 +1,8 @@
 import React from 'react'
 import Header from './Header'
-import Home from './Home'
-import Transaction from './Transaction'
-import Statement from './Statement'
+import Home from './pages/Home'
+import Transaction from './pages/Transaction'
+import Statement from './pages/Statement'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 

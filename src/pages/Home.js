@@ -1,6 +1,6 @@
 import React from 'react'
-import Balance from './Balance'
-import Criptobalance from './Criptobalance'
+import Balance from '../Balance'
+import Criptobalance from '../Criptobalance'
 import {Container, Row, Col} from 'react-bootstrap'
 
 class Home extends React.Component {
