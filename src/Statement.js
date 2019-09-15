@@ -21,8 +21,8 @@ class Statement extends React.Component {
   
   render() {
     const transactionsList = this.state.transactions.map(
-      ({ destination, source, value, sourceValue, date }) => {
-        let sourceColumn = ""
+      ({ destination, source, value, sourceValue, date }, id) => {
+        let sourceColumn
         if (sourceValue) {
           sourceColumn = (
             <td className="text-danger">
@@ -31,7 +31,7 @@ class Statement extends React.Component {
           )
         }
         return (
-          <tr>
+          <tr key={id}>
             <td className="text-success" colSpan={ sourceValue ? 1 : 2 }>
               +{value} {destination}
             </td>
