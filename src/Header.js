@@ -11,13 +11,13 @@ class Header extends React.Component {
         <Row>
           <Col className="app-name align-self-center text-center" md={4} xs={12}>
             <Link to="/">
-            obsidian
+              obsidian
             </Link>
           </Col>
           <Col className="menu py-4" md xs={12}>
             <Row className="px-4 text-center">
               <Col xs={12} sm={6} md>
-                <Link to="/transaction/" className="transaction">EXTRATO</Link>
+                <Link to="/statement/" className="transaction">EXTRATO</Link>
               </Col>
               <Col xs={12} sm={6} md>
                 <Link to="/transaction/" className="transaction">COMPRA</Link>
