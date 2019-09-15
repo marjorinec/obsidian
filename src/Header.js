@@ -10,7 +10,9 @@ class Header extends React.Component {
       <section className="header mb-4">
         <Row>
           <Col className="app-name align-self-center text-center" md={4} xs={12}>
+            <Link to="/">
             obsidian
+            </Link>
           </Col>
           <Col className="menu py-4" md xs={12}>
             <Row className="px-4 text-center">
