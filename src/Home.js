@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from './Header'
 import Balance from './Balance'
 import Criptobalance from './Criptobalance'
 import {Container, Row, Col} from 'react-bootstrap'
@@ -8,7 +7,6 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home">
-        <Header/>
         <Container>
           <Row>
             <Col xs={12} md className="mb-2 mb-0-md">
