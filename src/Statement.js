@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 
 class Statement extends React.Component {
   constructor(props) {
@@ -21,19 +21,29 @@ class Statement extends React.Component {
   
   render() {
     const transactionsList = this.state.transactions.map(
-      ({ destination, source, value }) => {
+      ({ destination, source, value, sourceValue, date }) => {
         return (
-          <ListGroupItem>
-            {source} -> {destination} : {value}
-          </ListGroupItem>  
+          <tr>
+            <td className="text-success">
+              +{value} {destination}
+            </td>
+            <td className="text-danger">
+              -{sourceValue} {source}
+            </td>
+            <td>
+              {date.toLocaleString('pt-BR')}
+            </td>
+          </tr>  
         )
       }
     )
 
     return (
-      <ListGroup>
-        {transactionsList}
-      </ListGroup>
+      <Table striped bordered>
+        <tbody>
+          {transactionsList}
+        </tbody>
+      </Table>
     )
   }
 }
