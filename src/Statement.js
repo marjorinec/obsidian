@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import { Table, Container } from 'react-bootstrap'
 
 class Statement extends React.Component {
   constructor(props) {
@@ -45,11 +45,13 @@ class Statement extends React.Component {
     )
 
     return (
-      <Table striped bordered>
-        <tbody>
-          {transactionsList}
-        </tbody>
-      </Table>
+      <Container>
+        <Table striped bordered>
+          <tbody>
+            {transactionsList}
+          </tbody>
+        </Table>
+      </Container>
     )
   }
 }
