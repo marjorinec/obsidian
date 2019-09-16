@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Form, Row, Col, InputGroup } from 'react-bootstrap'
+import { Container, Form, Row, Col, InputGroup, Button } from 'react-bootstrap'
 import Currencies from './../Currencies.json'
 
 class Transaction extends React.Component {
@@ -8,7 +8,7 @@ class Transaction extends React.Component {
     super(props)
     this.state = {
       'source': null,
-      'destination': null
+      'destination': null,
     }
 
     this.handleCoinSelection = this.handleCoinSelection.bind(this)
@@ -42,6 +42,31 @@ class Transaction extends React.Component {
     )
   }
 
+  renderValueSection() {
+    if (this.state.source && this.state.destination) {
+      return (
+        <section className="value">
+          <h3>Valor</h3>
+          cotação
+          saldo
+          <InputGroup>
+            <Form.Control
+              type="number"
+            />
+            <InputGroup.Append>
+              <InputGroup.Text>
+                {this.state.source}
+              </InputGroup.Text>
+            </InputGroup.Append>
+          </InputGroup>
+          <Button variant="primary" type="button">
+            Converter
+          </Button>
+        </section>  
+      )
+    }
+  }
+
   render() {
     return (
       <Container>
@@ -54,21 +79,7 @@ class Transaction extends React.Component {
             <h3>Moeda destino</h3>
             {this.renderCoinSelector('destination', this.state.source)}
           </section>
-          <section className="value">
-            <h3>Valor</h3>
-            cotação
-            saldo
-            <InputGroup>
-              <Form.Control
-                type="number"
-              />
-              <InputGroup.Append>
-                <InputGroup.Text>
-                  {this.state.source}
-                </InputGroup.Text>
-              </InputGroup.Append>
-            </InputGroup>
-          </section>                  
+          {this.renderValueSection()}                
         </Form>
       </Container>
     )
