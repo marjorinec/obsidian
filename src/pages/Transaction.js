@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Form, Row, Col, InputGroup, Button } from 'react-bootstrap'
+import { Container, Form, Row, Col, InputGroup, Button, Card } from 'react-bootstrap'
 import Currencies from './../Currencies.json'
 
 class Transaction extends React.Component {
@@ -20,17 +20,27 @@ class Transaction extends React.Component {
 
   renderCoinSelector(varName, disabledCurrency) {
     const currencyList = Currencies.map(({ name, code }) => {
+      const isDisabled = disabledCurrency === code
+      const isSelected = this.state[varName] === code 
       return (
-        <Col key={code}>
-          <Form.Check 
-            type="radio"
-            name={varName}
-            value={code}
-            label={name}
-            checked={this.state[varName] === code}
-            onChange={this.handleCoinSelection}
-            disabled={disabledCurrency === code}
-          />
+        <Col key={code} className="text-center">
+          <label>
+            <Card className="currency-selector text-center p-4" 
+              bg={isSelected ? 'secondary' : 'light'}
+              text={isDisabled ? 'muted' : ''}
+            >
+              <h2>{code}</h2>
+              <span className="">{name}</span>
+              <Form.Check style={{display: 'none'}}
+                type="radio"
+                name={varName}
+                value={code}
+                checked={isSelected}
+                onChange={this.handleCoinSelection}
+                disabled={isDisabled}
+              />
+            </Card>
+          </label>  
         </Col>
       )
     })
