@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Form, Row, Col } from 'react-bootstrap'
+import { Container, Form, Row, Col, InputGroup } from 'react-bootstrap'
 import Currencies from './../Currencies.json'
 
 class Transaction extends React.Component {
@@ -53,6 +53,21 @@ class Transaction extends React.Component {
           <section className="destination">
             <h3>Moeda destino</h3>
             {this.renderCoinSelector('destination', this.state.source)}
+          </section>
+          <section className="value">
+            <h3>Valor</h3>
+            cotação
+            saldo
+            <InputGroup>
+              <Form.Control
+                type="number"
+              />
+              <InputGroup.Append>
+                <InputGroup.Text>
+                  {this.state.source}
+                </InputGroup.Text>
+              </InputGroup.Append>
+            </InputGroup>
           </section>                  
         </Form>
       </Container>
