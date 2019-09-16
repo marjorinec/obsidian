@@ -4,15 +4,31 @@ import Currencies from './../Currencies.json'
 
 class Transaction extends React.Component {
 
-  renderCoinSelector(varName) {
+  constructor(props) {
+    super(props)
+    this.state = {
+      'source': null,
+      'destination': null
+    }
+
+    this.handleCoinSelection = this.handleCoinSelection.bind(this)
+  }
+
+  handleCoinSelection({target}) {
+    this.setState({ [target.name]: target.value })
+  }
+
+  renderCoinSelector(varName, disabledCurrency) {
     const currencyList = Currencies.map(({ name, code }) => {
       return (
         <Col key={code}>
-          <Form.Check
+          <Form.Check 
             type="radio"
             name={varName}
             value={code}
             label={name}
+            checked={this.state[varName] === code}
+            onChange={this.handleCoinSelection}
           />
         </Col>
       )
