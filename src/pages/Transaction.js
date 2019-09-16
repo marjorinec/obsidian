@@ -29,6 +29,7 @@ class Transaction extends React.Component {
             label={name}
             checked={this.state[varName] === code}
             onChange={this.handleCoinSelection}
+            disabled={disabledCurrency === code}
           />
         </Col>
       )
@@ -47,11 +48,11 @@ class Transaction extends React.Component {
         <Form>
           <section className="source">
             <h3>Moeda origem</h3>
-            {this.renderCoinSelector('source')}
+            {this.renderCoinSelector('source', this.state.destination)}
           </section>
           <section className="destination">
             <h3>Moeda destino</h3>
-            {this.renderCoinSelector('destination')}
+            {this.renderCoinSelector('destination', this.state.source)}
           </section>                  
         </Form>
       </Container>
