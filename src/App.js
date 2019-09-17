@@ -1,4 +1,5 @@
 import React from 'react'
+import { Spinner } from 'react-bootstrap'
 import Header from './Header'
 import Home from './pages/Home'
 import Transaction from './pages/Transaction'
@@ -8,7 +9,10 @@ import { connect } from 'react-redux'
 
 import { bindActionCreators } from 'redux'
 import axios from 'axios'
-import { setRate as setRateAction } from './store/actions'
+import { 
+  setRate as setRateAction,
+  setReady as setReadyAction 
+} from './store/actions'
 
 class App extends React.Component {
 
@@ -65,25 +69,46 @@ class App extends React.Component {
   }
 
   async componentDidMount(prevProps, prevState) {
-    ['BTC', 'BRT'].forEach(async (coin) => await this.getCoinValue(coin))
+    await this.getCoinValue('BRT')
+    await this.getCoinValue('BTC')
+    this.props.setReady()
   }
 
   render() {
+    let content
+    if (this.props.ready) {
+      content = (
+        <div>
+          <Route path="/" exact component={Home}/>
+          <Route path="/transaction/" component={Transaction}/>
+          <Route path="/statement/" component={Statement}/>
+        </div>
+      )
+    } else {
+      content = (
+        <Spinner
+          animation="border"
+          role="status"
+        />
+      )
+    }
     return (
       <Router>
-        <Header/>  
-        <Route path="/" exact component={Home}/>
-        <Route path="/transaction/" component={Transaction}/>
-        <Route path="/statement/" component={Statement}/>
+        <Header/>
+        {content}
       </Router>
     )
   }
 }
 
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  ready: state.ready
+})
+
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  setRate: setRateAction
+  setRate: setRateAction,
+  setReady: setReadyAction
 }, dispatch)
 
 export default connect(

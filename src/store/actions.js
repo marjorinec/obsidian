@@ -1,5 +1,6 @@
 import {
-  SET_RATE
+  SET_RATE,
+  SET_READY,
 } from './vars'
 
 /**
@@ -14,3 +15,10 @@ export function setRate(coin, rate) {
     rate: rate
   }
 }
+
+/**
+ * marca aplicativo como devidade carregado
+ */
+export const setReady = () => ({
+  type: SET_READY
+})
