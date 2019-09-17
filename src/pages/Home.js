@@ -13,10 +13,10 @@ class Home extends React.Component {
               <Balance/>
             </Col>
             <Col xs={12} md>
-              <Criptobalance coinName="Birita"/>
+              <Criptobalance coinCode="BRT"/>
             </Col>
             <Col xs={12} md>
-              <Criptobalance coinName="Bitcoin"/>
+              <Criptobalance coinCode="BTC"/>
             </Col>
           </Row>
       </Container>
