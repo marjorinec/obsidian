@@ -12,16 +12,29 @@ class Transaction extends React.Component {
     this.state = {
       'source': null,
       'destination': null,
+      'value': 0,
+      'convertedValue': null
     }
 
     this.handleCoinSelection = this.handleCoinSelection.bind(this)
+    this.handleValueInput = this.handleValueInput.bind(this)
   }
 
   handleCoinSelection({target}) {
     this.setState({ [target.name]: target.value })
   }
 
-  calculateRate(source, destination, value) {
+  handleValueInput({target}) {
+    this.setState({ value: target.value })
+    const convertedValue = this.convert(
+      this.state.source,
+      this.state.destination,
+      target.value
+    )
+    this.setState({ convertedValue: convertedValue })
+  }
+
+  convert(source, destination, value) {
     let convertedValue, sourceValue, destinationValue
     
     if (source !== 'BRL') {
@@ -42,7 +55,7 @@ class Transaction extends React.Component {
       const isDisabled = disabledCurrency === code
       const isSelected = this.state[varName] === code 
       return (
-        <Col key={code} className="text-center">
+        <Col key={code} className="text-center my-3">
           <label>
             <Card className="currency-selector text-center p-4" 
               bg={isSelected ? 'secondary' : 'light'}
@@ -71,27 +84,51 @@ class Transaction extends React.Component {
     )
   }
 
+  sampleRateLine() {
+    return `1 ${this.state.source} = ${this.convert(this.state.source, this.state.destination, 1).toFixed(6)} ${this.state.destination}`
+  }
+
+  renderConvertedValue() {
+    if (this.state.convertedValue) {
+      return `= ${this.state.convertedValue.toFixed(6)} ${this.state.destination}`
+    } else {
+      return 'Digite um valor para o ver convertido'
+    }
+  }
+
+
   renderValueSection() {
     if (this.state.source && this.state.destination) {
       return (
-        <section className="value">
-          <h3>Valor</h3>
-          cotação
-          saldo
-          <InputGroup>
-            <Form.Control
-              type="number"
-            />
-            <InputGroup.Append>
-              <InputGroup.Text>
-                {this.state.source}
-              </InputGroup.Text>
-            </InputGroup.Append>
-          </InputGroup>
-          <Button variant="primary" type="button">
-            Converter
-          </Button>
-        </section>  
+        <Card className="value">
+          <Card.Header as="h5">Quanto deseja converter?</Card.Header>
+          <Card.Body>
+            <p className="text-center">{this.sampleRateLine()}</p>
+            <Row className="align-items-center">
+              <Col>
+                <InputGroup>
+                  <Form.Control
+                    type="number" onChange={this.handleValueInput} value={this.state.value}
+                  />
+                  <InputGroup.Append>
+                    <InputGroup.Text >
+                      {this.state.source}
+                    </InputGroup.Text>
+                  </InputGroup.Append>
+                </InputGroup>  
+              </Col>
+              <Col className="align-middle">
+                {this.renderConvertedValue()}
+              </Col>
+            </Row>
+            
+          </Card.Body>
+          <Card.Footer className="text-right">
+            <Button variant="primary" type="button">
+              Converter
+            </Button>
+          </Card.Footer>
+        </Card>  
       )
     }
   }
@@ -100,14 +137,14 @@ class Transaction extends React.Component {
     return (
       <Container>
         <Form>
-          <section className="source">
-            <h3>Moeda origem</h3>
+          <Card className="source">
+            <Card.Header as="h5">Selecione a Moeda de Origem</Card.Header>
             {this.renderCoinSelector('source', this.state.destination)}
-          </section>
-          <section className="destination">
-            <h3>Moeda destino</h3>
+          </Card>
+          <Card className="destination my-3">
+            <Card.Header as="h5">Selecione a Moeda de Destino</Card.Header>
             {this.renderCoinSelector('destination', this.state.source)}
-          </section>
+          </Card>
           {this.renderValueSection()}                
         </Form>
       </Container>
