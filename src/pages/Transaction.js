@@ -18,6 +18,22 @@ class Transaction extends React.Component {
     this.setState({ [target.name]: target.value })
   }
 
+  calculateRate(source, destination, value) {
+    let convertedValue, sourceValue, destinationValue
+    
+    if (source !== 'BRL') {
+      sourceValue = value / this.props.rates[source]
+    } else { sourceValue = value }
+    
+    if (destination !== 'BRL') {
+      destinationValue = value / this.props.rates[destination]
+    } else { destinationValue = value }
+    
+    convertedValue = destinationValue * ( value / sourceValue )
+
+    return convertedValue
+  }
+
   renderCoinSelector(varName, disabledCurrency) {
     const currencyList = Currencies.map(({ name, code }) => {
       const isDisabled = disabledCurrency === code
