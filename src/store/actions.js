@@ -1,6 +1,9 @@
 import {
   SET_RATE,
   SET_READY,
+  INCREASE_BALANCE,
+  DECREASE_BALANCE,
+  REGISTER_TRANSACTION,
 } from './vars'
 
 /**
@@ -21,4 +24,22 @@ export function setRate(coin, rate) {
  */
 export const setReady = () => ({
   type: SET_READY
+})
+
+
+export const increaseBalance = (coin, value) => ({
+  type: INCREASE_BALANCE,
+  value: value,
+  coin: coin
+})
+
+export const decreaseBalance = (coin, value) => ({
+  type: DECREASE_BALANCE,
+  value: value,
+  coin: coin
+})
+
+export const registerTransaction = (source, destination, originalValue, value) => ({
+  type: REGISTER_TRANSACTION,
+  source, destination, originalValue, value
 })
