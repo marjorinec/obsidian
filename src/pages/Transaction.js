@@ -1,5 +1,8 @@
 import React from 'react'
 import { Container, Form, Row, Col, InputGroup, Button, Card } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import Currencies from './../Currencies.json'
 
 class Transaction extends React.Component {
@@ -112,4 +115,15 @@ class Transaction extends React.Component {
   }
 }
 
-export default Transaction
+const mapStateToProps = (state) => ({
+  rates: state.rates,
+  balance: state.balance
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+}, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Transaction)
