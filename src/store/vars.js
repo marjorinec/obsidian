@@ -13,13 +13,13 @@ export const DECREASE_BALANCE = 'DECREASE_BALANCE'
 export const initialState = {
   ready: false,
   rates: {
-    brt: null,
-    btc: null
+    BRT: null,
+    BTC: null
   },
   balance: {
-    brt: 0,
-    btc: 0,
-    brl: 0
+    BRT: 0,
+    BTC: 0,
+    BRL: 0
   },
   transactions: []
 }
