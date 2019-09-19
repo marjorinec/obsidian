@@ -29,7 +29,7 @@ class App extends React.Component {
 
   async fetchBitcoinValue() {
     const bitcoinValue = await axios.get("https://www.mercadobitcoin.net/api/BTC/ticker/")
-    return bitcoinValue.data.ticker.buy
+    return parseFloat(bitcoinValue.data.ticker.buy)
   }
 
   getUsefulDate(dayCounter=0) {
