@@ -54,11 +54,10 @@ class Transaction extends React.Component {
     this.setState({ convertedValue: convertedValue })
   }
 
-  handleNext() {
+  handleNext(event) {
+    event.preventDefault()
     this.setState({ waitingConfirmation: true })
-    console.log("bbbbbbbb")
     setTimeout(this.focusConfirmation, 10)
-    console.log("ccccc")
   }
 
   handleConfirm() {
@@ -172,7 +171,7 @@ class Transaction extends React.Component {
             
           </Card.Body>
           <Card.Footer className="text-right">
-            <Button variant="primary" type="button" onClick={this.handleNext}>
+            <Button variant="primary" type="submit">
               Converter
             </Button>
           </Card.Footer>
@@ -210,7 +209,7 @@ class Transaction extends React.Component {
   render() {
     return (
       <Container>
-        <Form ref={this.ref}>
+        <Form ref={this.ref} onSubmit={this.handleNext}>
           <Card className="source">
             <Card.Header as="h5">Selecione a Moeda de Origem</Card.Header>
             {this.renderCoinSelector('source', this.state.destination)}
