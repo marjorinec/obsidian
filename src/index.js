@@ -6,11 +6,14 @@ import * as serviceWorker from './serviceWorker';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import { Provider } from 'react-redux'
-import Store from './store/main'
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './store/main'
 
 ReactDOM.render(
-  <Provider store={Store}>
-    <App />
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
