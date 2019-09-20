@@ -1,6 +1,21 @@
 # Obsidian
-Obsidian é uma single-page application de um banco virtual que permite transações de moedas diferentes - real e duas criptomoedas.
-Ele foi feito como um desafio técnico para a Stone.
+Obsidian é uma single-page application de um banco virtual que permite transações de moedas diferentes - real e criptomoedas.
+Você inicialmente recebe R$ 100.000,00 que são adicionados à sua carteira, e pode fazer conversões livremente entre as moedas disponíveis - Real, Brita e Bitcoin. Ao realizar uma transação, ela é adicionada ao extrato.
+
+A aplicação foi feita como um desafio técnico para a Stone.
+
+## Como executar
+1) Instalar dependências
+
+```
+yarn install
+```
+
+2) Rodar o projeto
+
+```
+yarn start
+```
 
 ## Arquitetura
 
@@ -8,18 +23,16 @@ Ele foi feito como um desafio técnico para a Stone.
 
 #### Geral
 - Header
-- botão de voltar
-- Loading
 
-#### Home
+#### Home / Carteira
 - Card do saldo da conta
-- Card das criptomoedas
-
-#### Transações
-- ???
+- Cards com a cotação de cada criptomoeda
 
 #### Extrato
-- Transação
+- Tabela de transações realizadas
+
+#### Transação
+- Converte uma moeda para a outra, simplificando as operações de compra, venda e troca
 
 ### Dependências/Bibliotecas
 - Redux
@@ -28,10 +41,8 @@ Ele foi feito como um desafio técnico para a Stone.
 - Roteador
  - react-router
 
-
-### Passos pro roteamento
-- instala
-- tag principal do aplicativo vai ser Router
-- cria componentes separados pra cada página (home e extrato)
-- LinkTo as urls desejadas no Header
-- e cria as rotas no componente principal usando o <Route>
+## Pendências
+- Formatar adequadamente os valores monetários das transações
+- Criar mais unidades de teste
+- Melhorar o visual da aplicação
+- Refatorar as funções renderCoinSelector, renderConvertedValue, renderValueSection e renderConfirmation em componentes separados
