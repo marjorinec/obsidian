@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Form, Row, Col, InputGroup, Button, Card, Alert } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import convert from '../lib/currencyConverter'
 
 import Currencies from './../Currencies.json'
 
@@ -46,10 +47,11 @@ class Transaction extends React.Component {
       value: target.value, 
       waitingConfirmation: false 
     })
-    const convertedValue = this.convert(
+    const convertedValue = convert(
       this.state.source,
       this.state.destination,
-      target.value
+      target.value,
+      this.props.rates
     )
     this.setState({ convertedValue: convertedValue })
   }
@@ -82,21 +84,7 @@ class Transaction extends React.Component {
     )
   }
 
-  convert(source, destination, value) {
-    let convertedValue, sourceValue, destinationValue
-    
-    if (source !== 'BRL') {
-      sourceValue = value / this.props.rates[source]
-    } else { sourceValue = value }
-    
-    if (destination !== 'BRL') {
-      destinationValue = value / this.props.rates[destination]
-    } else { destinationValue = value }
-    
-    convertedValue = destinationValue * ( value / sourceValue )
-
-    return convertedValue
-  }
+  
 
   renderCoinSelector(varName, disabledCurrency) {
     const currencyList = Currencies.map(({ name, code }) => {
@@ -133,7 +121,7 @@ class Transaction extends React.Component {
   }
 
   sampleRateLine() {
-    return `1 ${this.state.source} = ${this.convert(this.state.source, this.state.destination, 1).toFixed(6)} ${this.state.destination}`
+    return `1 ${this.state.source} = ${convert(this.state.source, this.state.destination, 1, this.props.rates).toFixed(6)} ${this.state.destination}`
   }
 
   renderConvertedValue(prefix="") {
