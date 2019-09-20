@@ -1,24 +1,35 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, ListGroup } from 'react-bootstrap'
+import { connect } from 'react-redux'
 
 class Balance extends React.Component {
   render() {
     return (
       <Card style={{ width: '12rem'}}>
-        <Card.Body>
-          <Card.Title>
-            Seu Saldo
-          </Card.Title>
-          <Card.Text as="ul" className="list-unstyled">
-            <li>R$ 100.000,00</li>
-            <li>BRT 15</li>
-            <li> Bitcoin 20</li>
-          </Card.Text>
-        </Card.Body>
+        <Card.Header>
+          Seu Saldo
+        </Card.Header>
+        <ListGroup>
+          <ListGroup.Item>
+            {`R$ ${this.props.balance['BRL']}`}
+          </ListGroup.Item>
+          <ListGroup.Item>
+            {`BRT ${this.props.balance['BRT']}`}
+          </ListGroup.Item>
+          <ListGroup.Item>
+            {`BTC ${this.props.balance['BTC']}`}
+          </ListGroup.Item>
+        </ListGroup>
       </Card>
     )
   }
 
 }
 
-export default Balance
+const mapStateToProps = (state) => ({
+  balance: state.balance
+})
+
+export default connect(
+  mapStateToProps
+)(Balance)
