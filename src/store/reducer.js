@@ -46,7 +46,8 @@ function reducer(state = initialState, action) {
             source: action.source,
             destination: action.destination,
             sourceValue: action.sourceValue,
-            value: action.value
+            value: action.value,
+            date: new Date()
           }]
         )
       }
