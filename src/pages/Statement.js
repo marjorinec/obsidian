@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 class Statement extends React.Component {
   
   render() {
-    const transactionsList = this.props.transactions.map(
+    const transactionsList = this.props.transactions.reverse().map(
       ({ destination, source, value, sourceValue, date }, id) => {
         let sourceColumn
         if (sourceValue) {
@@ -18,12 +18,12 @@ class Statement extends React.Component {
         }
         return (
           <tr key={id}>
-            <td className="text-success" colSpan={ sourceValue ? 1 : 2 }>
-              +{value} {destination}
-            </td>
-            {sourceColumn}
             <td>
               {date.toLocaleString('pt-BR')}
+            </td>
+            {sourceColumn}
+            <td className="text-success" colSpan={ sourceValue ? 1 : 2 }>
+              +{value} {destination}
             </td>
           </tr>  
         )
