@@ -11,6 +11,7 @@ class Transaction extends React.Component {
 
   constructor(props) {
     super(props)
+    this.ref = React.createRef()
     this.state = {
       'source': null,
       'destination': null,
@@ -23,6 +24,14 @@ class Transaction extends React.Component {
     this.handleValueInput = this.handleValueInput.bind(this)
     this.handleNext = this.handleNext.bind(this)
     this.handleConfirm = this.handleConfirm.bind(this)
+    this.focusConfirmation = this.focusConfirmation.bind(this)
+  }
+
+  focusConfirmation() {
+    this.ref.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    }) 
   }
 
   handleCoinSelection({target}) {
@@ -47,6 +56,9 @@ class Transaction extends React.Component {
 
   handleNext() {
     this.setState({ waitingConfirmation: true })
+    console.log("bbbbbbbb")
+    setTimeout(this.focusConfirmation, 10)
+    console.log("ccccc")
   }
 
   handleConfirm() {
@@ -187,7 +199,7 @@ class Transaction extends React.Component {
         </p>
         <hr/>
         <div className="actions d-flex justify-content-end">
-          <Button variant="danger" onClick={this.handleConfirm}>
+          <Button variant="danger" onClick={this.handleConfirm} ref={this.ref}>
             Confirmar
           </Button>
         </div>
@@ -198,7 +210,7 @@ class Transaction extends React.Component {
   render() {
     return (
       <Container>
-        <Form>
+        <Form ref={this.ref}>
           <Card className="source">
             <Card.Header as="h5">Selecione a Moeda de Origem</Card.Header>
             {this.renderCoinSelector('source', this.state.destination)}
