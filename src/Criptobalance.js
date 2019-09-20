@@ -1,22 +1,20 @@
-import React from 'react'
-import { Card } from 'react-bootstrap'
+import React from "react";
+import { Card } from "react-bootstrap";
 
+import { connect } from "react-redux";
 
-import { connect } from 'react-redux'
-
-import Currencies from './Currencies.json'
-
+import Currencies from "./Currencies.json";
 
 class Criptobalance extends React.Component {
   constructor(props) {
-    super(props)
-    const currency = Currencies.find((item) => item.code === props.coinCode) 
-    this.coinName = currency.name
+    super(props);
+    const currency = Currencies.find(item => item.code === props.coinCode);
+    this.coinName = currency.name;
   }
 
   render() {
     return (
-      <Card style={{ width: '12rem'}}>
+      <Card style={{ width: "12rem" }}>
         <Card.Header>
           <strong>{this.coinName}</strong>
         </Card.Header>
@@ -24,14 +22,12 @@ class Criptobalance extends React.Component {
           {`1 ${this.props.coinCode} = ${this.props.rate} BRL`}
         </Card.Body>
       </Card>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state, props) => ({
-  rate: state.rates[props.coinCode],
-})
+  rate: state.rates[props.coinCode]
+});
 
-export default connect(
-  mapStateToProps,
-)(Criptobalance)
+export default connect(mapStateToProps)(Criptobalance);

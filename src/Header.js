@@ -1,10 +1,9 @@
-import React from 'react'
-import './Header.css'
-import { Navbar, Nav } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import "./Header.css";
+import { Navbar, Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 class Header extends React.Component {
-
   render() {
     return (
       <Navbar bg="dark" variant="dark" className="header mb-4">
@@ -23,7 +22,7 @@ class Header extends React.Component {
           </NavLink>
         </Nav>
       </Navbar>
-    )
+    );
   }
 }
-export default Header
+export default Header;

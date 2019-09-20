@@ -5,23 +5,23 @@ import {
   INCREASE_BALANCE,
   DECREASE_BALANCE,
   REGISTER_TRANSACTION
-} from './vars'
+} from "./vars";
 
 function reducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case SET_RATE:
       return {
         ...state,
         rates: {
           ...state.rates,
-          [action.coin] : action.rate
+          [action.coin]: action.rate
         }
-      }
+      };
     case SET_READY:
       return {
         ...state,
         ready: true
-      }
+      };
     case INCREASE_BALANCE:
       return {
         ...state,
@@ -29,7 +29,7 @@ function reducer(state = initialState, action) {
           ...state.balance,
           [action.coin]: state.balance[action.coin] + action.value
         }
-      }
+      };
     case DECREASE_BALANCE:
       return {
         ...state,
@@ -37,23 +37,23 @@ function reducer(state = initialState, action) {
           ...state.balance,
           [action.coin]: state.balance[action.coin] - action.value
         }
-      }
+      };
     case REGISTER_TRANSACTION:
       return {
         ...state,
-        transactions: state.transactions.concat(
-          [{
+        transactions: state.transactions.concat([
+          {
             source: action.source,
             destination: action.destination,
             sourceValue: action.sourceValue,
             value: action.value,
             date: new Date()
-          }]
-        )
-      }
+          }
+        ])
+      };
     default:
-      return state
+      return state;
   }
 }
 
-export default reducer
+export default reducer;

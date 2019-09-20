@@ -1,7 +1,7 @@
-import React from 'react'
-import Balance from '../Balance'
-import Criptobalance from '../Criptobalance'
-import {Container, Row, Col} from 'react-bootstrap'
+import React from "react";
+import Balance from "../Balance";
+import Criptobalance from "../Criptobalance";
+import { Container, Row, Col } from "react-bootstrap";
 
 class Home extends React.Component {
   render() {
@@ -10,19 +10,19 @@ class Home extends React.Component {
         <Container>
           <Row>
             <Col xs={12} md className="mb-2 mb-0-md">
-              <Balance/>
+              <Balance />
             </Col>
             <Col xs={12} md>
-              <Criptobalance coinCode="BRT"/>
+              <Criptobalance coinCode="BRT" />
             </Col>
             <Col xs={12} md>
-              <Criptobalance coinCode="BTC"/>
+              <Criptobalance coinCode="BTC" />
             </Col>
           </Row>
-      </Container>
-    </div>
-      )
+        </Container>
+      </div>
+    );
   }
 }
 
-export default Home
+export default Home;

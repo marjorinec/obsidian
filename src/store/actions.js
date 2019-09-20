@@ -3,8 +3,8 @@ import {
   SET_READY,
   INCREASE_BALANCE,
   DECREASE_BALANCE,
-  REGISTER_TRANSACTION,
-} from './vars'
+  REGISTER_TRANSACTION
+} from "./vars";
 
 /**
  * define a cotação de uma moeda em relação ao BRL
@@ -16,7 +16,7 @@ export function setRate(coin, rate) {
     type: SET_RATE,
     coin: coin,
     rate: rate
-  }
+  };
 }
 
 /**
@@ -24,22 +24,29 @@ export function setRate(coin, rate) {
  */
 export const setReady = () => ({
   type: SET_READY
-})
-
+});
 
 export const increaseBalance = (coin, value) => ({
   type: INCREASE_BALANCE,
   value: value,
   coin: coin
-})
+});
 
 export const decreaseBalance = (coin, value) => ({
   type: DECREASE_BALANCE,
   value: value,
   coin: coin
-})
+});
 
-export const registerTransaction = (source, destination, sourceValue, value) => ({
+export const registerTransaction = (
+  source,
+  destination,
+  sourceValue,
+  value
+) => ({
   type: REGISTER_TRANSACTION,
-  source, destination, sourceValue, value
-})
+  source,
+  destination,
+  sourceValue,
+  value
+});
