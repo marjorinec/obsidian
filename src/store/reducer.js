@@ -41,7 +41,14 @@ function reducer(state = initialState, action) {
     case REGISTER_TRANSACTION:
       return {
         ...state,
-        
+        transactions: state.transactions.concat(
+          [{
+            source: action.source,
+            destination: action.destination,
+            sourceValue: action.sourceValue,
+            value: action.value
+          }]
+        )
       }
     default:
       return state

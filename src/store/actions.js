@@ -39,7 +39,7 @@ export const decreaseBalance = (coin, value) => ({
   coin: coin
 })
 
-export const registerTransaction = (source, destination, originalValue, value) => ({
+export const registerTransaction = (source, destination, sourceValue, value) => ({
   type: REGISTER_TRANSACTION,
-  source, destination, originalValue, value
+  source, destination, sourceValue, value
 })
