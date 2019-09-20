@@ -3,14 +3,15 @@ import Header from './Header'
 import Home from './pages/Home'
 import Transaction from './pages/Transaction'
 import Statement from './pages/Statement'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 
 function App() {
   return (
     <Router>
       <Header/>  
-      <Route path="/" exact component={Home}/>
+      <Route path="/balance/" component={Home}/>
+      <Redirect from="/" to="/balance/"/>
       <Route path="/transaction/" component={Transaction}/>
       <Route path="/statement/" component={Statement}/>
     </Router>
