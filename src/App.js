@@ -30,7 +30,9 @@ class App extends React.Component {
     return parseFloat(bitcoinValue.data.ticker.buy)
   }
 
-  getUsefulDate(dayCounter=0) {
+  //É necessário formatar a data para utilizá-la na API do Banco Central. dayCounter é o número de dias que precisa ser subtraído para
+  //obter uma cotação do dólar nesta API.
+  getFormatedDate(dayCounter=0) {
     const currentDay = new Date()
     let day = currentDay.getDate() - dayCounter
     let month = currentDay.getMonth() + 1
@@ -52,11 +54,11 @@ class App extends React.Component {
   async fetchDolarValue() {
     let dollarData
     let dollarValue = undefined
-    let currentDate = this.getUsefulDate()
+    let currentDate = this.getFormatedDate()
     let dayCounter = 0
 
     while (dollarValue === undefined) {
-      currentDate = this.getUsefulDate(dayCounter)
+      currentDate = this.getFormatedDate(dayCounter)
       dollarData = await axios.get(`https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${currentDate}'&$top=100&$format=json&$select=cotacaoCompra,cotacaoVenda,dataHoraCotacao`)
       dollarValue = dollarData.data.value[0]
       dayCounter += 1
@@ -65,7 +67,8 @@ class App extends React.Component {
     return dollarValue.cotacaoCompra
 
   }
-
+  
+  //Crédito inicial de R$100.000,00
   loadInitialData() {
     const creditsValue = 100000
     this.props.increaseBalance('BRL', creditsValue)
