@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Container } from 'react-bootstrap'
+import { Table, Container, Card } from 'react-bootstrap'
 
 import {connect} from 'react-redux'
 
@@ -32,11 +32,16 @@ class Statement extends React.Component {
 
     return (
       <Container>
-        <Table striped bordered>
-          <tbody>
-            {transactionsList}
-          </tbody>
-        </Table>
+        <Card>
+          <Card.Header as="h5">
+            Suas transações
+          </Card.Header>
+          <Table striped bordered className="my-0">
+            <tbody>
+              {transactionsList}
+            </tbody>
+          </Table>
+        </Card>
       </Container>
     )
   }
