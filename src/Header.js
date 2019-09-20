@@ -9,11 +9,11 @@ class Header extends React.Component {
     return (
       <Navbar bg="dark" variant="dark" className="header mb-4">
         <Navbar.Brand>
-          obsidian
+          <strong>obsidian</strong>
         </Navbar.Brand>
         <Nav>
           <NavLink to="/balance/" className="nav-link">
-            saldo
+            sua carteira
           </NavLink>
           <NavLink to="/statement/" className="nav-link">
             extrato

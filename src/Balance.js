@@ -7,7 +7,7 @@ class Balance extends React.Component {
     return (
       <Card style={{ width: '12rem'}}>
         <Card.Header>
-          Seu Saldo
+          <strong>Sua Carteira</strong>
         </Card.Header>
         <ListGroup>
           <ListGroup.Item>

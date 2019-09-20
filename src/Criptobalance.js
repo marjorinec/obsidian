@@ -18,7 +18,7 @@ class Criptobalance extends React.Component {
     return (
       <Card style={{ width: '12rem'}}>
         <Card.Header>
-          {this.coinName}
+          <strong>{this.coinName}</strong>
         </Card.Header>
         <Card.Body>
           {`1 ${this.props.coinCode} = ${this.props.rate} BRL`}
