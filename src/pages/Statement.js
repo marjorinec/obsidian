@@ -1,26 +1,12 @@
 import React from 'react'
 import { Table, Container } from 'react-bootstrap'
 
+import {connect} from 'react-redux'
+
 class Statement extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      transactions: [
-        {
-          destination: 'BRL', value: 100000, date: new Date()
-        },
-        {
-          source: 'BRL', destination: 'BRT', value: 15, sourceValue: 200, date: new Date()
-        },
-        {
-          source: 'BRL', destination: 'BTC', value: 10, sourceValue: 400, date: new Date()
-        }
-      ]
-    }
-  }
   
   render() {
-    const transactionsList = this.state.transactions.map(
+    const transactionsList = this.props.transactions.map(
       ({ destination, source, value, sourceValue, date }, id) => {
         let sourceColumn
         if (sourceValue) {
@@ -56,4 +42,10 @@ class Statement extends React.Component {
   }
 }
 
-export default Statement
+const mapStateToProps = (state) => ({
+  transactions: state.transactions
+})
+
+export default connect(
+  mapStateToProps
+)(Statement)

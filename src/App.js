@@ -9,10 +9,7 @@ import { connect } from 'react-redux'
 
 import { bindActionCreators } from 'redux'
 import axios from 'axios'
-import { 
-  setRate as setRateAction,
-  setReady as setReadyAction 
-} from './store/actions'
+import { setRate, setReady, registerTransaction, increaseBalance } from './store/actions'
 
 
 class App extends React.Component {
@@ -69,9 +66,18 @@ class App extends React.Component {
 
   }
 
+  loadInitialData() {
+    const creditsValue = 100000
+    this.props.increaseBalance('BRL', creditsValue)
+    this.props.registerTransaction(null, 'BRL', null, creditsValue)
+  }
+
   async componentDidMount(prevProps, prevState) {
     await this.getCoinValue('BRT')
     await this.getCoinValue('BTC')
+    if (this.props.transactions.length === 0) {
+      this.loadInitialData()
+    }
     this.props.setReady()
   }
 
@@ -105,12 +111,12 @@ class App extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  ready: state.ready
+  ready: state.ready,
+  transactions: state.transactions
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  setRate: setRateAction,
-  setReady: setReadyAction
+  setRate, setReady, registerTransaction, increaseBalance
 }, dispatch)
 
 export default connect(
